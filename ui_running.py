@@ -1,6 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from qroundprogressbar import QRoundProgressBar
 
 class Ui_Running(object):
     def setupUi(self, MainWindow):
@@ -16,6 +17,17 @@ class Ui_Running(object):
         self.gridlayout.setObjectName('gridlayout')
         self.centralwidget.setLayout(self.gridlayout)
 
+        self.widget = QWidget(self.centralwidget)
+        self.widget.setFixedSize(210, 210)
+        self.widget.setObjectName('widget')
+        self.widgetGrid = QGridLayout(self.widget)
+        self.widgetGrid.setObjectName('widgetGrid')
+        self.widget.setLayout(self.widgetGrid)
+
+        self.roundProgressBar = QRoundProgressBar(self.widget)
+        self.roundProgressBar.setValue(u"75%")
+        self.widgetGrid.addWidget(self.roundProgressBar, 0, 0, 1, 1)
+
         self.rebootLabel = QLabel(self.centralwidget)
         self.rebootLabel.setAlignment(Qt.AlignCenter)
         self.rebootLabel.setObjectName('rebootLabel')
@@ -29,9 +41,10 @@ class Ui_Running(object):
         self.pushButton.setCursor(Qt.PointingHandCursor)
         self.pushButton.setObjectName('pushButton')
 
-        self.gridlayout.addWidget(self.rebootLabel, 0, 0, 1, 1)
-        self.gridlayout.addWidget(self.label, 1, 0, 1, 1)
-        self.gridlayout.addWidget(self.pushButton, 2, 0, 1, 1)
+        self.gridlayout.addWidget(self.widget, 0, 0, 3, 1)
+        self.gridlayout.addWidget(self.rebootLabel, 0, 1, 1, 1)
+        self.gridlayout.addWidget(self.label, 1, 1, 1, 1)
+        self.gridlayout.addWidget(self.pushButton, 2, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 

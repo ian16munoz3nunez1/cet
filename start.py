@@ -28,9 +28,10 @@ class Start(QMainWindow):
             self.ui.pushButton.setText(u"Cancelar")
             self.ui.rebootLabel.show()
             self.ui.rebootLabel.setText(f"Reinicio 1 de {self.__reboots}")
-            self.ui.gridlayout.addWidget(self.ui.rebootLabel, 0, 0, 1, 1)
-            self.ui.gridlayout.addWidget(self.ui.label, 1, 0, 1, 1)
-            self.ui.gridlayout.addWidget(self.ui.pushButton, 2, 0, 1, 1)
+            self.ui.gridlayout.addWidget(self.ui.widget, 0, 0, 3, 1)
+            self.ui.gridlayout.addWidget(self.ui.rebootLabel, 0, 1, 1, 1)
+            self.ui.gridlayout.addWidget(self.ui.label, 1, 1, 1, 1)
+            self.ui.gridlayout.addWidget(self.ui.pushButton, 2, 1, 1, 1)
             
             t1 = threading.Thread(target=self.runProc)
             t2 = threading.Thread(target=self.showProc)
