@@ -17,16 +17,35 @@ class Ui_Running(object):
         self.gridlayout.setObjectName('gridlayout')
         self.centralwidget.setLayout(self.gridlayout)
 
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setFixedSize(210, 210)
-        self.widget.setObjectName('widget')
-        self.widgetGrid = QGridLayout(self.widget)
-        self.widgetGrid.setObjectName('widgetGrid')
-        self.widget.setLayout(self.widgetGrid)
+        self.mainFrame = QFrame(self.centralwidget)
+        self.mainFrame.setFixedSize(200, 200)
+        self.mainFrame.setStyleSheet("""border-radius: 10px;
+        background-color: rgb(100, 100, 100);""")
+        self.mainFrame.setObjectName('mainFrame')
+        self.mainFrameGrid = QGridLayout(self.mainFrame)
+        self.mainFrameGrid.setObjectName('mainFrameGrid')
+        self.mainFrame.setLayout(self.mainFrameGrid)
 
-        self.roundProgressBar = QRoundProgressBar(self.widget)
-        self.roundProgressBar.setValue(u"75%")
-        self.widgetGrid.addWidget(self.roundProgressBar, 0, 0, 1, 1)
+        self.roundProgressBar = QFrame(self.mainFrame)
+        self.roundProgressBar.setGeometry(QRect(5, 5, 190, 190))
+        self.roundProgressBar.setStyleSheet("""border-radius: 95px;
+        background-color: qconicalgradient(cx:0.5, cy:0.5, angle:-90,
+        stop: 0.999 rgba(0, 255, 0, 100), stop: 1.0 rgba(0, 255, 0, 255));""")
+        self.roundProgressBar.setObjectName('roundProgressBar')
+
+        self.backFrame = QFrame(self.mainFrame)
+        self.backFrame.setGeometry(QRect(20, 20, 160, 160))
+        self.backFrame.setStyleSheet("""border-radius: 80px;
+        background-color: rgb(100, 100, 100);""")
+        self.backFrame.setObjectName('backFrame')
+
+        self.lRoundProgressBar = QLabel(self.mainFrame)
+        self.lRoundProgressBar.setFixedSize(140, 140)
+        self.lRoundProgressBar.setAlignment(Qt.AlignCenter)
+        self.lRoundProgressBar.setStyleSheet("""border-radius: 70px;""")
+        self.lRoundProgressBar.setObjectName('roundProgressBar')
+
+        self.mainFrameGrid.addWidget(self.lRoundProgressBar, 0, 0, 1, 1)
 
         self.rebootLabel = QLabel(self.centralwidget)
         self.rebootLabel.setAlignment(Qt.AlignCenter)
@@ -41,7 +60,7 @@ class Ui_Running(object):
         self.pushButton.setCursor(Qt.PointingHandCursor)
         self.pushButton.setObjectName('pushButton')
 
-        self.gridlayout.addWidget(self.widget, 0, 0, 3, 1)
+        self.gridlayout.addWidget(self.mainFrame, 0, 0, 3, 1)
         self.gridlayout.addWidget(self.rebootLabel, 0, 1, 1, 1)
         self.gridlayout.addWidget(self.label, 1, 1, 1, 1)
         self.gridlayout.addWidget(self.pushButton, 2, 1, 1, 1)
