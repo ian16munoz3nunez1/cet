@@ -31,6 +31,10 @@ class Running(QMainWindow):
 
         self.runningProcess()
 
+    def closeEvent(self, event):
+        self.__cancel = True
+        self.__end = True
+
     def runningProcess(self):
         if self.__running == False:
             self.__running = True

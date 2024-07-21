@@ -8,7 +8,11 @@ class Ui_Running(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName('MainWindow')
 
-        MainWindow.setGeometry(400, 200, 500, 250)
+        MainWindow.resize(500, 250)
+        qRect = MainWindow.frameGeometry()
+        centerPoint = QDektopWidget().availableGeometry().center()
+        qRect.moveCenter(centerPoint)
+        MainWindow.move(qRect.topLeft())
         MainWindow.setWindowTitle(u"Running")
 
         self.centralwidget = QWidget()

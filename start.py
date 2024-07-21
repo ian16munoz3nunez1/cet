@@ -28,6 +28,10 @@ class Start(QMainWindow):
         runCPU.start()
         showCPU.start()
 
+    def closeEvent(self, event):
+        self.__cancel = True
+        self.__end = True
+
     def startingProcess(self):
         if self.__running == False:
             self.__running = True
