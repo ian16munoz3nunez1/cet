@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow
 import threading
+import psutil
+import numpy as np
 import os
 from time import sleep
 from ui_running import Ui_Running
@@ -16,8 +18,17 @@ class Running(QMainWindow):
 
         self.__running = False
         self.__cancel = False
+        self.__end = False
+
         self.__sec = 10
         self.__i = self.__sec
+        self.__cpu = 0
+
+        runCPU = threading.Thread(target=self.runCPU)
+        showCPU = threading.Thread(target=self.showCPU)
+        runCPU.start()
+        showCPU.start()
+
         self.runningProcess()
 
     def runningProcess(self):
@@ -40,6 +51,25 @@ class Running(QMainWindow):
 
         else:
             self.__cancel = True
+            self.__end = True
+
+    def runCPU(self):
+        while True:
+            if self.__cancel or self.__end:
+                break
+
+            cpu = psutil.cpu_percent(interval=1, percpu=True)
+            self.__cpu = np.mean(cpu)
+            sleep(0.5)
+
+    def showCPU(self):
+        while True:
+            if self.__cancel or self.__end:
+                break
+
+            value = round(self.__cpu/100, 3)
+            self.ui.roundProgressBar.setValue(value)
+            sleep(0.5)
 
     def runProc(self):
         while True:
@@ -49,6 +79,7 @@ class Running(QMainWindow):
             self.__i -= 1
             sleep(1)
 
+        self.__end = True
         if self.__i == 0:
             with open('reboot.txt', 'w') as file:
                 file.write(f"{self.__currentReboot+1}-{self.__reboots}")
@@ -58,7 +89,7 @@ class Running(QMainWindow):
 
     def showProc(self):
         while True:
-            if self.__i == 0 or self.__cancel:
+            if self.__i == 0 or self.__cancel or self.__end:
                 break
             self.ui.label.setText(f"Reiniciando en {self.__i} segundos")
 

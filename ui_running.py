@@ -8,7 +8,7 @@ class Ui_Running(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName('MainWindow')
 
-        MainWindow.setGeometry(400, 200, 300, 200)
+        MainWindow.setGeometry(400, 200, 500, 250)
         MainWindow.setWindowTitle(u"Running")
 
         self.centralwidget = QWidget()
@@ -18,14 +18,13 @@ class Ui_Running(object):
         self.centralwidget.setLayout(self.gridlayout)
 
         self.widget = QWidget(self.centralwidget)
-        self.widget.setFixedSize(210, 210)
+        self.widget.setFixedSize(200, 200)
         self.widget.setObjectName('widget')
         self.widgetGrid = QGridLayout(self.widget)
         self.widgetGrid.setObjectName('widgetGrid')
         self.widget.setLayout(self.widgetGrid)
 
         self.roundProgressBar = QRoundProgressBar(self.widget)
-        self.roundProgressBar.setValue(u"75%")
         self.widgetGrid.addWidget(self.roundProgressBar, 0, 0, 1, 1)
 
         self.rebootLabel = QLabel(self.centralwidget)
