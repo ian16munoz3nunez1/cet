@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtCore import Qt, QEvent
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QMainWindow, QGraphicsDropShadowEffect
 import threading
 import psutil
 import numpy as np
@@ -12,6 +14,14 @@ class Running(QMainWindow):
         self.ui = Ui_Running()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.runningProcess)
+
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setBlurRadius(20)
+        self.shadow.setColor(QColor(255, 0, 0, 255))
+        self.ui.pushButton.setGraphicsEffect(self.shadow)
+        self.ui.pushButton.installEventFilter(self)
 
         self.__currentReboot = 0
         self.__reboots = 0
@@ -34,6 +44,16 @@ class Running(QMainWindow):
     def closeEvent(self, event):
         self.__cancel = True
         self.__end = True
+
+    def eventFilter(self, object, event):
+        if object == self.ui.pushButton and event.type() == QEvent.Enter:
+            self.shadow.setBlurRadius(50)
+            self.ui.pushButton.setGraphicsEffect(self.shadow)
+        if object == self.ui.pushButton and event.type() == QEvent.Leave:
+            self.shadow.setBlurRadius(20)
+            self.ui.pushButton.setGraphicsEffect(self.shadow)
+
+        return False
 
     def runningProcess(self):
         if self.__running == False:

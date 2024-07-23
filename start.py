@@ -1,5 +1,6 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtCore import Qt, QEvent
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QMainWindow, QGraphicsDropShadowEffect
 import threading
 import psutil
 import numpy as np
@@ -13,6 +14,14 @@ class Start(QMainWindow):
         self.ui = Ui_Start()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.startingProcess)
+
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setBlurRadius(20)
+        self.shadow.setColor(QColor(0, 255, 0, 255))
+        self.ui.pushButton.setGraphicsEffect(self.shadow)
+        self.ui.pushButton.installEventFilter(self)
 
         self.__running = False
         self.__cancel = False
@@ -32,6 +41,16 @@ class Start(QMainWindow):
         self.__cancel = True
         self.__end = True
 
+    def eventFilter(self, object, event):
+        if object == self.ui.pushButton and event.type() == QEvent.Enter:
+            self.shadow.setBlurRadius(50)
+            self.ui.pushButton.setGraphicsEffect(self.shadow)
+        if object == self.ui.pushButton and event.type() == QEvent.Leave:
+            self.shadow.setBlurRadius(20)
+            self.ui.pushButton.setGraphicsEffect(self.shadow)
+
+        return False
+
     def startingProcess(self):
         if self.__running == False:
             self.__running = True
@@ -39,7 +58,22 @@ class Start(QMainWindow):
             self.__reboots = self.ui.spinBox.value()
 
             self.ui.spinBox.hide()
+            self.shadow.setColor(QColor(255, 0, 0, 255))
             self.ui.pushButton.setText(u"Cancelar")
+            self.ui.pushButton.setStyleSheet("""QPushButton {
+            min-height: 30px;
+            background-color: rgb(40, 40, 40);
+            border: 1px;
+            border-style: solid;
+            border-color: rgb(160, 0, 0);
+            border-radius: 15px;
+            }
+            QPushButton:hover {
+            background: rgb(200, 0, 0);
+            }
+            QPushButton:pressed {
+            background: rgb(180, 0, 0);
+            }""")
             self.ui.rebootLabel.show()
             self.ui.rebootLabel.setText(f"Reinicio 1 de {self.__reboots}")
             self.ui.gridlayout.addWidget(self.ui.widget, 0, 0, 3, 1)
