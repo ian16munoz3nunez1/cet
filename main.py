@@ -7,6 +7,10 @@ from start import Start
 from running import Running
 
 app = QApplication(sys.argv)
+with open("main.css", 'r') as file:
+    style = file.read()
+file.close()
+app.setStyleSheet(style)
 
 filename = 'reboot.txt'
 

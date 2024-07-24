@@ -8,7 +8,7 @@ class Ui_Start(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName('MainWindow')
 
-        MainWindow.resize(500, 250)
+        MainWindow.resize(650, 250)
         qRect = MainWindow.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qRect.moveCenter(centerPoint)
