@@ -3,8 +3,8 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QMainWindow, QGraphicsDropShadowEffect
 import threading
 import psutil
-import numpy as np
 import os
+import getpass
 from time import sleep
 from ui_running import Ui_Running
 
@@ -32,6 +32,8 @@ class Running(QMainWindow):
 
         self.__sec = 10
         self.__i = self.__sec
+        self.__username = getpass.getuser()
+        self.__filename = f'C:\\Users\\{self.__username}\\Desktop\\reboot.txt'
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.showCPU)
@@ -57,7 +59,7 @@ class Running(QMainWindow):
         if self.__running == False:
             self.__running = True
 
-            with open('reboot.txt', 'r') as file:
+            with open(self.__filename, 'r') as file:
                 content = file.read().split('-')
                 self.__currentReboot = int(content[0])
                 self.__reboots = int(content[1])
@@ -90,7 +92,7 @@ class Running(QMainWindow):
 
         self.__end = True
         if self.__i == 0:
-            with open('reboot.txt', 'w') as file:
+            with open(self.__filename, 'w') as file:
                 file.write(f"{self.__currentReboot+1}-{self.__reboots}")
             file.close()
             os.system("shutdown /r /t 1")

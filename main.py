@@ -32,8 +32,7 @@ QPushButton {
 app.setStyleSheet(style)
 
 username = getpass.getuser()
-filename = 'reboot.txt'
-# filename = f'C:\\Users\\{username}\\Desktop\\reboot.txt'
+filename = f'C:\\Users\\{username}\\Desktop\\reboot.txt'
 
 if not os.path.exists(filename):
     start = Start()
