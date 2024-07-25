@@ -16,8 +16,7 @@ class Running(QMainWindow):
         self.ui.pushButton.clicked.connect(self.runningProcess)
 
         self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setXOffset(0)
-        self.shadow.setYOffset(0)
+        self.shadow.setOffset(0, 0)
         self.shadow.setBlurRadius(20)
         self.shadow.setColor(QColor(255, 0, 0, 255))
         self.ui.pushButton.setGraphicsEffect(self.shadow)

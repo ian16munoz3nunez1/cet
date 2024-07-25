@@ -6,6 +6,7 @@ import getpass
 from PyQt5.QtWidgets import QApplication
 from start import Start
 from running import Running
+from end import End
 
 app = QApplication(sys.argv)
 style = """
@@ -40,13 +41,14 @@ if not os.path.exists(filename):
 else:
     with open(filename, 'r') as file:
         content = file.readline().split('-')
-        if int(content[0]) == int(content[1]):
-            print("Fin de la prueba")
-            sys.exit(1)
     file.close()
 
-    running = Running()
-    running.show()
+    if int(content[0]) == int(content[1]):
+        end = End()
+        end.show()
+    else:
+        running = Running()
+        running.show()
 
 sys.exit(app.exec_())
 

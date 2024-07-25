@@ -43,18 +43,18 @@ class Ui_Running(object):
         self.pushButton.setText(u"Cancelar")
         self.pushButton.setCursor(Qt.PointingHandCursor)
         self.pushButton.setStyleSheet("""QPushButton {
-        min-height: 30px;
-        background-color: rgb(40, 40, 40);
-        border: 1px;
-        border-style: solid;
-        border-color: rgb(160, 0, 0);
-        border-radius: 15px;
+            min-height: 30px;
+            background-color: rgb(40, 40, 40);
+            border: 1px;
+            border-style: solid;
+            border-color: rgb(160, 0, 0);
+            border-radius: 15px;
         }
         QPushButton:hover {
-        background: rgb(200, 0, 0);
+            background: rgb(200, 0, 0);
         }
         QPushButton:pressed {
-        background: rgb(180, 0, 0);
+            background: rgb(180, 0, 0);
         }""")
         self.pushButton.setObjectName('pushButton')
 

@@ -1,19 +1,18 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from qroundprogressbar import QRoundProgressBar
 
-class Ui_Start(object):
+class Ui_End(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName('MainWindow')
 
-        MainWindow.resize(650, 250)
+        MainWindow.resize(200, 150)
         qRect = MainWindow.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qRect.moveCenter(centerPoint)
         MainWindow.move(qRect.topLeft())
-        MainWindow.setWindowTitle(u"Start")
+        MainWindow.setWindowTitle(u"Finished")
 
         self.centralwidget = QWidget()
         self.centralwidget.setObjectName('centralwidget')
@@ -21,35 +20,13 @@ class Ui_Start(object):
         self.gridlayout.setObjectName('gridlayout')
         self.centralwidget.setLayout(self.gridlayout)
 
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setFixedSize(200, 200)
-        self.widget.setObjectName('widget')
-        self.widgetGrid = QGridLayout(self.widget)
-        self.widgetGrid.setObjectName('widgetGrid')
-        self.widget.setLayout(self.widgetGrid)
-
-        self.roundProgressBar = QRoundProgressBar(self.widget)
-        self.widgetGrid.addWidget(self.roundProgressBar, 0, 0, 1, 1)
-
-        self.rebootLabel = QLabel(self.centralwidget)
-        self.rebootLabel.setAlignment(Qt.AlignCenter)
-        self.rebootLabel.hide()
-        self.rebootLabel.setObjectName('rebootLabel')
-
         self.label = QLabel(self.centralwidget)
-        self.label.setText(u"Ingresa el numero de reinicios:")
+        self.label.setText(u"Prueba terminada")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setObjectName('label')
 
-        self.spinBox = QSpinBox(self.centralwidget)
-        self.spinBox.setValue(1)
-        self.spinBox.setMinimum(1)
-        self.spinBox.setMaximum(100)
-        self.spinBox.setAccelerated(True)
-        self.spinBox.setObjectName('spinBox')
-
         self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setText(u"Iniciar proceso")
+        self.pushButton.setText(u"OK")
         self.pushButton.setCursor(Qt.PointingHandCursor)
         self.pushButton.setStyleSheet("""QPushButton {
             min-height: 30px;
@@ -59,6 +36,7 @@ class Ui_Start(object):
             border-color: rgb(0, 160, 0);
             border-radius: 15px;
         }
+
         QPushButton:hover {
             background: rgb(0, 200, 0);
         }
@@ -67,10 +45,8 @@ class Ui_Start(object):
         }""")
         self.pushButton.setObjectName('pushButton')
 
-        self.gridlayout.addWidget(self.widget, 0, 0, 2, 1)
-        self.gridlayout.addWidget(self.label, 0, 1, 1, 1)
-        self.gridlayout.addWidget(self.spinBox, 0, 2, 1, 1)
-        self.gridlayout.addWidget(self.pushButton, 1, 1, 1, 2)
+        self.gridlayout.addWidget(self.label, 0, 0, 1, 1)
+        self.gridlayout.addWidget(self.pushButton, 1, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
