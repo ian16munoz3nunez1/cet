@@ -84,7 +84,7 @@ class Running(QMainWindow):
 
             cpu = psutil.cpu_percent(interval=1, percpu=True)
             self.__cpu = np.mean(cpu)
-            sleep(0.5)
+            sleep(0.2)
 
     def showCPU(self):
         while True:
@@ -93,7 +93,7 @@ class Running(QMainWindow):
 
             value = round(self.__cpu/100, 3)
             self.ui.roundProgressBar.setValue(value)
-            sleep(0.5)
+            sleep(0.2)
 
     def runProc(self):
         while True:

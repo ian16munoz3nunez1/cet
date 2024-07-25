@@ -39,11 +39,17 @@ class QRoundProgressBar(QWidget):
     def setValue(self, value):
         self.lRoundProgressBar.setText(f"CPU: {value*100:.2f}%")
 
-        value = 1.0-value
-        stop1 = round(value-0.001, 3)
-        stop2 = round(value, 3)
+        if value == 1.0:
+            stop1 = "1.0"
+            stop2 = "1.0"
+        else:
+            value = 1.0-value
+            stop1 = str(round(value-0.001, 3))
+            stop2 = str(round(value, 3))
 
-        self.roundProgressBar.setStyleSheet(f"""border-radius: 95px;
+        style = """border-radius: 95px;
         background-color: qconicalgradient(cx:0.5, cy:0.5, angle:-90,
-        stop: {stop1} rgba(0, 255, 0, 100), stop: {stop2} rgba(0, 255, 0, 255));""")
+        stop: {stop1} rgba(0, 255, 0, 100), stop: {stop2} rgba(0, 255, 0, 255));"""
+        style = style.replace("{stop1}", stop1).replace("{stop2}", stop2)
+        self.roundProgressBar.setStyleSheet(style)
 
