@@ -1,4 +1,4 @@
-from PyQt5.QtCore import Qt, QEvent
+from PyQt5.QtCore import Qt, QEvent, QTimer
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QMainWindow, QGraphicsDropShadowEffect
 import threading
@@ -30,12 +30,10 @@ class Start(QMainWindow):
         self.__reboots = 1
         self.__sec = 10
         self.__i = self.__sec
-        self.__cpu = 0
 
-        runCPU = threading.Thread(target=self.runCPU)
-        showCPU = threading.Thread(target=self.showCPU)
-        runCPU.start()
-        showCPU.start()
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.showCPU)
+        self.timer.start(500)
 
     def closeEvent(self, event):
         self.__cancel = True
@@ -91,23 +89,10 @@ class Start(QMainWindow):
             self.__cancel = True
             self.__end = True
 
-    def runCPU(self):
-        while True:
-            if self.__cancel or self.__end:
-                break
-
-            cpu = psutil.cpu_percent(interval=1, percpu=True)
-            self.__cpu = np.mean(cpu)
-            sleep(0.2)
-
     def showCPU(self):
-        while True:
-            if self.__cancel or self.__end:
-                break
-
-            value = round(self.__cpu/100, 3)
-            self.ui.roundProgressBar.setValue(value)
-            sleep(0.2)
+        cpu = psutil.cpu_percent()
+        value = round(cpu/100, 3)
+        self.ui.roundProgressBar.setValue(value)
 
     def runProc(self):
         while True:
