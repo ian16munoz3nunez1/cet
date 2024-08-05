@@ -13,6 +13,7 @@ class Running(QMainWindow):
         super(Running, self).__init__()
         self.ui = Ui_Running()
         self.ui.setupUi(self)
+        self.ui.actionSalir.triggered.connect(self.close)
         self.ui.pushButton.clicked.connect(self.runningProcess)
 
         self.shadow = QGraphicsDropShadowEffect(self)

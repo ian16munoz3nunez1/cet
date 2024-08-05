@@ -13,6 +13,7 @@ class Start(QMainWindow):
         super(Start, self).__init__()
         self.ui = Ui_Start()
         self.ui.setupUi(self)
+        self.ui.actionSalir.triggered.connect(self.close)
         self.ui.pushButton.clicked.connect(self.startingProcess)
 
         self.shadow = QGraphicsDropShadowEffect(self)

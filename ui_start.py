@@ -15,6 +15,11 @@ class Ui_Start(object):
         MainWindow.move(qRect.topLeft())
         MainWindow.setWindowTitle(u"Start")
 
+        self.actionSalir = QAction(MainWindow)
+        self.actionSalir.setText(u"Salir")
+        self.actionSalir.setShortcut("Ctrl+Q")
+        self.actionSalir.setObjectName('actionSalir')
+
         self.centralwidget = QWidget()
         self.centralwidget.setObjectName('centralwidget')
         self.gridlayout = QGridLayout(self.centralwidget)
@@ -78,6 +83,13 @@ class Ui_Start(object):
         self.menubar.setObjectName('menubar')
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName('statusbar')
+
+        self.menuArchivo = QMenu(self.menubar)
+        self.menuArchivo.setTitle(u"Archivo")
+        self.menuArchivo.setObjectName('menuArchivo')
+        self.menuArchivo.addAction(self.actionSalir)
+
+        self.menubar.addAction(self.menuArchivo.menuAction())
 
         MainWindow.setMenuBar(self.menubar)
         MainWindow.setStatusBar(self.statusbar)
