@@ -59,7 +59,7 @@ class Start(QMainWindow):
 
             self.ui.spinBox.hide()
             self.shadow.setColor(QColor(255, 0, 0, 255))
-            self.ui.pushButton.setText(u"Cancelar")
+            self.ui.pushButton.setText(u"Cancel")
             self.ui.pushButton.setStyleSheet("""QPushButton {
             min-height: 30px;
             background-color: rgb(40, 40, 40);
@@ -75,7 +75,7 @@ class Start(QMainWindow):
             background: rgb(180, 0, 0);
             }""")
             self.ui.rebootLabel.show()
-            self.ui.rebootLabel.setText(f"Reinicio 1 de {self.__reboots}")
+            self.ui.rebootLabel.setText(f"Reboot 1 of {self.__reboots}")
             self.ui.gridlayout.addWidget(self.ui.widget, 0, 0, 3, 1)
             self.ui.gridlayout.addWidget(self.ui.rebootLabel, 0, 1, 1, 1)
             self.ui.gridlayout.addWidget(self.ui.label, 1, 1, 1, 1)
@@ -116,5 +116,5 @@ class Start(QMainWindow):
         while True:
             if self.__i == 0 or self.__cancel or self.__end:
                 break
-            self.ui.label.setText(f"Reiniciando en {self.__i} segundos")
+            self.ui.label.setText(f"Rebooting in {self.__i} seconds")
 

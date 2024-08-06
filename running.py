@@ -65,7 +65,7 @@ class Running(QMainWindow):
                 self.__reboots = int(content[1])
             file.close()
 
-            self.ui.rebootLabel.setText(f"Reinicio {self.__currentReboot+1} de {self.__reboots}")
+            self.ui.rebootLabel.setText(f"Reboot {self.__currentReboot+1} of {self.__reboots}")
 
             t1 = threading.Thread(target=self.runProc)
             t2 = threading.Thread(target=self.showProc)
@@ -102,5 +102,5 @@ class Running(QMainWindow):
         while True:
             if self.__i == 0 or self.__cancel or self.__end:
                 break
-            self.ui.label.setText(f"Reiniciando en {self.__i} segundos")
+            self.ui.label.setText(f"Rebooting in {self.__i} seconds")
 

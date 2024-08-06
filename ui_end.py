@@ -12,7 +12,7 @@ class Ui_End(object):
         centerPoint = QDesktopWidget().availableGeometry().center()
         qRect.moveCenter(centerPoint)
         MainWindow.move(qRect.topLeft())
-        MainWindow.setWindowTitle(u"Finished")
+        MainWindow.setWindowTitle(u"Test complete")
 
         self.centralwidget = QWidget()
         self.centralwidget.setObjectName('centralwidget')
@@ -21,7 +21,7 @@ class Ui_End(object):
         self.centralwidget.setLayout(self.gridlayout)
 
         self.label = QLabel(self.centralwidget)
-        self.label.setText(u"Prueba terminada")
+        self.label.setText(u"Test completed successfully")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setObjectName('label')
 

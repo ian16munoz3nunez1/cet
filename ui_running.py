@@ -16,7 +16,7 @@ class Ui_Running(object):
         MainWindow.setWindowTitle(u"Running")
 
         self.actionSalir = QAction(MainWindow)
-        self.actionSalir.setText(u"Salir")
+        self.actionSalir.setText(u"Quit")
         self.actionSalir.setShortcut("Ctrl+Q")
         self.actionSalir.setObjectName('actionSalir')
 
@@ -45,7 +45,7 @@ class Ui_Running(object):
         self.label.setObjectName('label')
 
         self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setText(u"Cancelar")
+        self.pushButton.setText(u"Cancel")
         self.pushButton.setCursor(Qt.PointingHandCursor)
         self.pushButton.setStyleSheet("""QPushButton {
             min-height: 30px;
@@ -76,7 +76,7 @@ class Ui_Running(object):
         self.statusbar.setObjectName('statusbar')
 
         self.menuArchivo = QMenu(self.menubar)
-        self.menuArchivo.setTitle(u"Archivo")
+        self.menuArchivo.setTitle(u"File")
         self.menuArchivo.setObjectName('menuArchivo')
         self.menuArchivo.addAction(self.actionSalir)
 

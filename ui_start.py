@@ -16,7 +16,7 @@ class Ui_Start(object):
         MainWindow.setWindowTitle(u"Start")
 
         self.actionSalir = QAction(MainWindow)
-        self.actionSalir.setText(u"Salir")
+        self.actionSalir.setText(u"Quit")
         self.actionSalir.setShortcut("Ctrl+Q")
         self.actionSalir.setObjectName('actionSalir')
 
@@ -42,7 +42,7 @@ class Ui_Start(object):
         self.rebootLabel.setObjectName('rebootLabel')
 
         self.label = QLabel(self.centralwidget)
-        self.label.setText(u"Ingresa el numero de reinicios:")
+        self.label.setText(u"Enter the number of reboots:")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setObjectName('label')
 
@@ -54,7 +54,7 @@ class Ui_Start(object):
         self.spinBox.setObjectName('spinBox')
 
         self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setText(u"Iniciar proceso")
+        self.pushButton.setText(u"Start test")
         self.pushButton.setCursor(Qt.PointingHandCursor)
         self.pushButton.setStyleSheet("""QPushButton {
             min-height: 30px;
@@ -85,7 +85,7 @@ class Ui_Start(object):
         self.statusbar.setObjectName('statusbar')
 
         self.menuArchivo = QMenu(self.menubar)
-        self.menuArchivo.setTitle(u"Archivo")
+        self.menuArchivo.setTitle(u"File")
         self.menuArchivo.setObjectName('menuArchivo')
         self.menuArchivo.addAction(self.actionSalir)
 
