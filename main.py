@@ -44,6 +44,7 @@ else:
     file.close()
 
     if int(content[0]) == int(content[1]):
+        os.remove(filename)
         end = End()
         end.show()
     else:
