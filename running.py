@@ -5,6 +5,7 @@ import threading
 import psutil
 import os
 import getpass
+from datetime import datetime
 from time import sleep
 from ui_running import Ui_Running
 
@@ -82,26 +83,76 @@ class Running(QMainWindow):
             self.__stop = True # Se detiene el conteo de segundos
 
             # Pregunta al usuario si quiere cancelar el proceso
-            ans = QMessageBox.warning(
-                self,
-                "Canceling test",
-                "Are you sure you want to cancel the test?...",
-                buttons=QMessageBox.Yes | QMessageBox.No,
-                defaultButton=QMessageBox.No
-            )
+            msgBox = QMessageBox()
+            msgBox.setWindowTitle(u"Canceling test")
+            msgBox.setIcon(QMessageBox.Question)
+            msgBox.setText(u"Are you sure you want to cancel the test?...")
+            msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msgBox.setDefaultButton(QMessageBox.No)
+            msgBox.setInformativeText(u"Progress will be lost")
+            msgBox.setDetailedText(u"The progress of the test will be lost and you will need to start the test again")
+            style = """
+            QWidget {
+                background-color: rgb(100, 100, 100);
+            }
+            QPushButton {
+                min-height: 30px;
+                min-width: 40px;
+                background-color: rgb(40, 40, 40);
+                border: 1px;
+                border-style: solid;
+                border-color: rgb(0, 0, 200);
+                border-radius: 15px;
+            }
+            QPushButton:hover {
+                background: rgb(0, 0, 200);
+            }
+            QPushButton:pressed {
+                background: rgb(0, 0, 180);
+            }
+            """
+            msgBox.setStyleSheet(style)
+            msgBox.setObjectName('msgBox')
+
+            ans = msgBox.exec_()
 
             if ans == QMessageBox.Yes: # Se cancela el proceso
                 self.hide()
                 os.remove(self.__filename)
-                QMessageBox.critical(
-                    self,
-                    "Test canceled",
-                    f"{self.__currentReboot} reboots of {self.__reboots}"
-                )
+
+                msgBox = QMessageBox()
+                msgBox.setWindowTitle(u"Test canceled")
+                msgBox.setIcon(QMessageBox.Critical)
+                msgBox.setText(f"{self.__currentReboot} reboots of {self.__reboots}")
+                now = datetime.now()
+                date = now.strftime('%Y/%m/%d')
+                time = now.strftime('%H:%M:%S')
+                msgBox.setInformativeText(f"Test canceled at\n{date}\n{time}")
+                style = """
+                QWidget {
+                    background-color: rgb(100, 100, 100);
+                }
+                QPushButton {
+                    min-height: 30px;
+                    min-width: 40px;
+                    background-color: rgb(40, 40, 40);
+                    border: 1px;
+                    border-style: solid;
+                    border-color: rgb(0, 0, 200);
+                    border-radius: 15px;
+                }
+                QPushButton:hover {
+                    background-color: rgb(0, 0, 200);
+                }
+                QPushButton:pressed {
+                    background-color: rgb(0, 0, 180);
+                }
+                """
+                msgBox.setStyleSheet(style)
+                msgBox.exec_()
 
                 self.__cancel = True
                 self.__end = True
-
 
             else: # Se reanuda el proceso
                 self.__stop = False
