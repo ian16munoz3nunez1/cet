@@ -49,7 +49,7 @@ class Ui_Start(object):
         self.spinBox = QSpinBox(self.centralwidget)
         self.spinBox.setValue(1)
         self.spinBox.setMinimum(1)
-        self.spinBox.setMaximum(100)
+        self.spinBox.setMaximum(1000)
         self.spinBox.setAccelerated(True)
         self.spinBox.setObjectName('spinBox')
 
